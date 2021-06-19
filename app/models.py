@@ -29,3 +29,18 @@ class User(UserMixin, db.Model):
     return f'User {self.fname} {self.sname}'
 
 
+class Blog(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String(255))
+  content = db.Column(db.String())
+  dateposted = db.Column(db.DateTime, default=datetime.utcnow())
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+  def save_pitch(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  @classmethod
+  def get_blogs_content(cls):
+    return cls.query.all()
+
