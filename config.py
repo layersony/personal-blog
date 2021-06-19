@@ -11,6 +11,7 @@ class Config:
   MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
   MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
   UPLOADED_PHOTOS_DEST = 'app/static/photos'
+  QUOTE_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
 
 class ProdConfig(Config):
   pass
