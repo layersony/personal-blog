@@ -79,3 +79,8 @@ class Comment(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))
+
+class Quote:
+  def __init__(self, author, quote):
+    self.author = author
+    self.quote = quote
