@@ -30,11 +30,15 @@ class User(UserMixin, db.Model):
 
 
 class Blog(db.Model):
+  __tablename__ = 'blog'
+  
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(255))
   content = db.Column(db.String())
   dateposted = db.Column(db.DateTime, default=datetime.utcnow())
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
+  users = db.relationship('User', backref='blog', lazy='dynamic')
 
   def save_pitch(self):
     db.session.add(self)
@@ -44,3 +48,18 @@ class Blog(db.Model):
   def get_blogs_content(cls):
     return cls.query.all()
 
+class Comment(db.Model):
+  __tablename__ = 'comments'
+
+  id = db.Column(db.Integer, primary_key = True)
+  comment = db.Column(db.String(2000))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
+
+  def save_comment(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  @classmethod
+  def get_specific_comment(cls, id):
+    return cls.query.filter_by(pitch_id = id).all()
