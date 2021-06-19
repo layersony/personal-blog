@@ -37,8 +37,7 @@ class Blog(db.Model):
   content = db.Column(db.String())
   dateposted = db.Column(db.DateTime, default=datetime.utcnow())
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
-  users = db.relationship('User', backref='blog', lazy='dynamic')
+  comments = db.relationship('Comment', backref='blog', lazy='dynamic')
 
   def save_pitch(self):
     db.session.add(self)

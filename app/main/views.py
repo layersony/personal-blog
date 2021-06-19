@@ -9,3 +9,8 @@ def index():
   title = 'Blog'
   return render_template('index.html', blogs=blog, title=title)
 
+@main.route('/post/blog', methods=['GET', 'POST',])
+def postblog():
+  blogform = BlogPostForm()
+  return render_template('postblog.html', blogform=blogform)
+
