@@ -1,4 +1,4 @@
-from . import db
+from . import db, login_manager
 from flask_login import current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -63,3 +63,7 @@ class Comment(db.Model):
   @classmethod
   def get_specific_comment(cls, id):
     return cls.query.filter_by(pitch_id = id).all()
+
+@login_manager.user_loader
+def load_user(user_id):
+  return User.query.get(int(user_id))
