@@ -6,6 +6,12 @@
 
 {% for justone in blog %}
     <h3>{{ justone.title }}</h3>
+    <p>  Comments <span>{{justone.comments.count()}}</span></p>
+    <a href="{{ url_for('main.viewcomments', id=justone.id) }}">View Comments</a>
+    <a href="{{ url_for('main.deletePost', id=justone.id) }}">Delete</a>
 {% endfor %}
+
+<p>{{ quote.quote }}</p>
+<p>{{ quote.author }}</p>
 
 {% endblock %}

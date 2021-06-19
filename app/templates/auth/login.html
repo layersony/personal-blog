@@ -3,3 +3,6 @@
 <h3 class="text-center">Login</h3>
 {{ wtf.quick_form(loginform) }}
 <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Create Account</a></p>
+
+<p>{{ quote.quote }}</p>
+<p>{{ quote.author }}</p>
