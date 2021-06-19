@@ -54,3 +54,8 @@ def comment(id):
   blogcomment = Comment.query.filter_by(blog_id=id).all()
   return render_template('profile/comment.html', comment=form, blog=blog, blogcomment = blogcomment)
 
+@main.route('/post/<id>/comments', methods=['GET'])
+def viewcomments(id):
+  allcomments = Comment.query.filter_by(blog_id=id).all()
+  print(allcomments)
+  return render_template('profile/viewcomment.html', allcomments=allcomments)

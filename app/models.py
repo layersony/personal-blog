@@ -15,6 +15,11 @@ class User(UserMixin, db.Model):
   dataJoined = db.Column(db.DateTime, default=datetime.utcnow())
   pass_secure = db.Column(db.String(255))
 
+  comments = db.relationship('Comment', backref='users', lazy= 'dynamic')
+  blog = db.relationship('Blog', backref='users', lazy= 'dynamic')
+
+
+
   @property
   def password(self):
     raise AttributeError("You Can't Read the password attribute")
@@ -38,6 +43,7 @@ class Blog(db.Model):
   content = db.Column(db.String())
   dateposted = db.Column(db.DateTime, default=datetime.utcnow())
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
   comments = db.relationship('Comment', backref='blog', lazy='dynamic')
 
   def save_blog(self):
@@ -58,6 +64,12 @@ class Comment(db.Model):
 
   def save_comment(self):
     db.session.add(self)
+    db.session.commit()
+
+  @classmethod
+  def delete_comment(cls, id):
+    todele = cls.query.filter_by(id=id).first()
+    db.session.delete(todele)
     db.session.commit()
   
   @classmethod
