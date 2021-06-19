@@ -1,4 +1,5 @@
-from flask import render_template
+from flask import render_template, url_for, redirect
+from flask.templating import render_template_string
 from . import main
 from ..models import Blog, User, Comment
 from .forms import CommentForm, BlogPostForm 
@@ -12,5 +13,14 @@ def index():
 @main.route('/post/blog', methods=['GET', 'POST',])
 def postblog():
   blogform = BlogPostForm()
-  return render_template('postblog.html', blogform=blogform)
+
+  if blogform.validate_on_submit():
+    title = blogform.title.data
+    content = blogform.content.data
+    
+    newblog = Blog(title=title, content=content)
+    newblog.save_blog()
+    return redirect(url_for('main.index'))
+
+  return render_template('profile/postblog.html', blogform=blogform)
 
