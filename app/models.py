@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
   id = db.Column(db.Integer, primary_key=True)
   fname = db.Column(db.String(128))
   sname = db.Column(db.String(128))
+  username = db.Column(db.String(255))
   email = db.Column(db.String(128))
   profile_pic = db.Column(db.String())
   dataJoined = db.Column(db.DateTime, default=datetime.utcnow())
