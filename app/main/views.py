@@ -1,5 +1,6 @@
 from flask import render_template, url_for, redirect, abort
 from . import main
+from .. import db
 from ..models import Blog, User, Comment
 from .forms import CommentForm, BlogPostForm 
 from flask_login import login_required, current_user
@@ -8,6 +9,7 @@ from flask_login import login_required, current_user
 def index():
   blog = Blog.get_blogs_content()
   title = 'Blog'
+  blog.reverse()
   return render_template('index.html', blogs=blog, title=title)
 
 @main.route('/post/blog', methods=['GET', 'POST',])
@@ -59,3 +61,18 @@ def viewcomments(id):
   allcomments = Comment.query.filter_by(blog_id=id).all()
   print(allcomments)
   return render_template('profile/viewcomment.html', allcomments=allcomments)
+
+@main.route('/post/<id>/delete', methods = ['GET', 'POST'])
+def deletePost(id):
+  todele = Blog.query.filter_by(id=id).first()
+  db.session.delete(todele)
+  db.session.commit()
+  return redirect(url_for('main.profile', uname=current_user.username))
+
+@main.route('/post/<id>/comment/delete', methods = ['GET', 'POST'])
+def deleteComment(id):
+  todele = Comment.query.filter_by(id=id).first()
+  db.session.delete(todele)
+  db.session.commit()
+  return redirect(url_for('main.profile', uname=current_user.username))
+
