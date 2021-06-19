@@ -5,7 +5,8 @@
 
 
 {% for justone in allcomments %}
-    <h3>{{ justone.comment }}</h3>
+        <h3>{{ justone.title }}</h3>
+        <p>  Comments <span>{{justone.comments.count()}}</span></p>
     <a href="{{ url_for('main.deleteComment', id=justone.id) }}">Delete</a>
 {% endfor %}
 
