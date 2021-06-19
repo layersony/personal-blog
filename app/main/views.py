@@ -11,6 +11,7 @@ def index():
   return render_template('index.html', blogs=blog, title=title)
 
 @main.route('/post/blog', methods=['GET', 'POST',])
+@login_required
 def postblog():
   blogform = BlogPostForm()
 
@@ -18,13 +19,14 @@ def postblog():
     title = blogform.title.data
     content = blogform.content.data
     
-    newblog = Blog(title=title, content=content)
+    newblog = Blog(title=title, content=content, user_id=current_user.id)
     newblog.save_blog()
     return redirect(url_for('main.profile', uname=current_user.username))
 
   return render_template('profile/postblog.html', blogform=blogform)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
   user = User.query.filter_by(username = uname).first()
 
@@ -33,4 +35,6 @@ def profile(uname):
     abort(404)
   else:
     blog = Blog.query.filter_by(user_id=current_user.id).all()
+    print(blog)
     return render_template('profile/profile.html', user = user, blog = blog)
+

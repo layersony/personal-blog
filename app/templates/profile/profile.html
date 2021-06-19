@@ -2,4 +2,10 @@
 {% block content %}
 <h1>Profile </h1>
 <a href="{{ url_for('main.postblog') }}">Post A Blog</a>
+
+
+{% for justone in blog %}
+    <h3>{{ justone.title }}</h3>
+{% endfor %}
+
 {% endblock %}
