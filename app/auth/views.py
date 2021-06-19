@@ -4,6 +4,7 @@ from . forms import LoginForm, Registration
 from ..models import User
 from .. import db
 from flask_login import login_user, login_required, logout_user, current_user
+from ..request import get_quotes
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -16,8 +17,8 @@ def login():
       return redirect(request.args.get('next') or url_for('main.profile', uname=current_user.username))
     flash('Invalid username or password')
   title = 'Login'
-  
-  return render_template('/auth/login.html', loginform = login_form, title=title)
+  quote = get_quotes()
+  return render_template('/auth/login.html', loginform = login_form, title=title, quote=quote)
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -30,7 +31,9 @@ def register():
     return redirect(url_for('auth.login'))
 
   title = 'New Account'
-  return render_template('auth/register.html', registrationform = form, title=title)
+  quote = get_quotes()
+
+  return render_template('auth/register.html', registrationform = form, title=title, quote=quote)
 
 @auth.route('/logout')
 @login_required

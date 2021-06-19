@@ -4,13 +4,15 @@ from .. import db
 from ..models import Blog, User, Comment
 from .forms import CommentForm, BlogPostForm 
 from flask_login import login_required, current_user
+from ..request import get_quotes
 
 @main.route('/')
 def index():
   blog = Blog.get_blogs_content()
   title = 'Blog'
   blog.reverse()
-  return render_template('index.html', blogs=blog, title=title)
+  quote = get_quotes()
+  return render_template('index.html', blogs=blog, title=title, quote=quote)
 
 @main.route('/post/blog', methods=['GET', 'POST',])
 @login_required
@@ -25,7 +27,8 @@ def postblog():
     newblog.save_blog()
     return redirect(url_for('main.profile', uname=current_user.username))
 
-  return render_template('profile/postblog.html', blogform=blogform)
+  quote = get_quotes()
+  return render_template('profile/postblog.html', blogform=blogform, quote=quote)
 
 @main.route('/user/<uname>')
 @login_required
@@ -37,8 +40,8 @@ def profile(uname):
     abort(404)
   else:
     blog = Blog.query.filter_by(user_id=current_user.id).all()
-    print(blog)
-    return render_template('profile/profile.html', user = user, blog = blog)
+    quote = get_quotes()
+    return render_template('profile/profile.html', user = user, blog = blog, quote=quote)
 
 @main.route('/comment/<id>', methods=['GET', 'POST'])
 @login_required
@@ -54,13 +57,15 @@ def comment(id):
     return redirect(url_for('main.index'))
   
   blogcomment = Comment.query.filter_by(blog_id=id).all()
-  return render_template('profile/comment.html', comment=form, blog=blog, blogcomment = blogcomment)
+  quote = get_quotes()
+
+  return render_template('profile/comment.html', comment=form, blog=blog, blogcomment = blogcomment, quote=quote)
 
 @main.route('/post/<id>/comments', methods=['GET'])
 def viewcomments(id):
   allcomments = Comment.query.filter_by(blog_id=id).all()
-  print(allcomments)
-  return render_template('profile/viewcomment.html', allcomments=allcomments)
+  quote = get_quotes()
+  return render_template('profile/viewcomment.html', allcomments=allcomments, quote=quote)
 
 @main.route('/post/<id>/delete', methods = ['GET', 'POST'])
 def deletePost(id):
@@ -75,4 +80,3 @@ def deleteComment(id):
   db.session.delete(todele)
   db.session.commit()
   return redirect(url_for('main.profile', uname=current_user.username))
-
