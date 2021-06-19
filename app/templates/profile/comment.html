@@ -1,3 +1,14 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{{wtf.quick_form(form)}}
+
+{{wtf.quick_form(comment)}}
+
+{% if blogcomment %}
+{% for justone in blogcomment%}
+    <p>{{ justone.comment }}</p>
+    <p>Comment By <span class="text-success">{{ justone.users }}</span></p>
+
+{% endfor %}
+{% else %}
+<p>No comments Yet</p>
+{% endif %}

@@ -38,3 +38,19 @@ def profile(uname):
     print(blog)
     return render_template('profile/profile.html', user = user, blog = blog)
 
+@main.route('/comment/<id>', methods=['GET', 'POST'])
+@login_required
+def comment(id):
+  form = CommentForm()
+  blog = Blog.query.filter_by(id=id).first()
+
+  if form.validate_on_submit():
+    comment = form.comment.data
+    new_comment = Comment(comment = comment, user_id = current_user.id, blog_id = id)
+
+    new_comment.save_comment()
+    return redirect(url_for('main.index'))
+  
+  blogcomment = Comment.query.filter_by(blog_id=id).all()
+  return render_template('profile/comment.html', comment=form, blog=blog, blogcomment = blogcomment)
+
