@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>View Comments </h1>
+
+
+{% for justone in allcomments %}
+    <h3>{{ justone.comment }}</h3>
+    <a href="{{ url_for('main.deleteComment', id=justone.id) }}">Delete</a>
+{% endfor %}
+
+{% endblock %}

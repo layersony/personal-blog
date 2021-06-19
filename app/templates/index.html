@@ -4,5 +4,9 @@
 <h1>Home</h1>
 {% for blog in blogs %}
   <p>{{ blog.title }}</p>
+  <p>{{ blog.dateposted.strftime('%I:%M %p, %a %b %d, %Y')}}</p>
+  <a href="{{ url_for('main.comment', id= blog.id) }}"><button>Comment</button></a>
+  Comments <span>{{blog.comments.count()}}</span>
+
 {% endfor %}
 {% endblock %}
