@@ -2,8 +2,7 @@
 
 {% block content%}
 <h3>Home</h3>
-<div class="container d-md-flex justify-content-center align-items-center">
-  <div class="blogcont">
+
 
     {% for blog in blogs %}
     <div>
@@ -26,8 +25,7 @@
       <p>{{ quote.quote }}</p>
       <sub>--{{ quote.author }}--</sub>
     </div>
-  </div>
-</div>
+
 
 
 {% endblock %}

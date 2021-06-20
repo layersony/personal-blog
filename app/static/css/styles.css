@@ -43,5 +43,20 @@
 
 /**  **/
 .blogcont{
-  max-width: 1000px;
+  width: 1000px;
+
+}
+.blogcomment{
+  background-color: rgba(0, 0, 0, 0.315);
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#submit{
+  border-radius: 2px solid blue;
+  color: black;
+}
+#submit:hover{
+  background-color: blue;
+  color: white;
 }
