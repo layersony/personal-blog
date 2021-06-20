@@ -10,9 +10,9 @@
         <h3>{{ blog.title|capitalize }}</h3>
         <span>Posted on {{ blog.dateposted.strftime('%a %b %d, %Y')}}</span>
       </div>
-      <p>{{ blog.content }}</p>
+      <p>{{ blog.content|truncate(200) }}</p>
       <div class="d-md-flex justify-content-between align-items-center">
-        <span>Author {{ blog.users}}</span>
+        <span>Author: {{ blog.users}}</span>
         <a class="fullblog" href="{{ url_for('main.fullblog', id= blog.id) }}">View Full Blog</a>
         <a href="{{ url_for('main.comment', id= blog.id) }}"><button class="btn btn-outline-success">Comments <span>{{blog.comments.count()}}</span></button></a>
       </div>
