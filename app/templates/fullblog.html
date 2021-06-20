@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5 class="text-center mb-3">Blog | Post</h5>
+
+<div class="d-md-flex justify-content-between align-content-center">
+<h2 >{{ blogdetail.title| capitalize }}</h2>
+<p>Author: {{ blogdetail.users }}</p>
+<span>Comments {{blogdetail.comments.count()}}</span>
+</div>
+
+<hr>
+<p>{{ blogdetail.content }}</p>
+<a href="{{ url_for('main.comment', id= blogdetail.id) }}"><button class="btn btn-outline-success">Comment</button></a>
+
+<hr class="mt-3 mb-3">
+
+<div class="text-center">
+  <p>{{ quote.quote }}</p>
+  <sub>--{{ quote.author }}--</sub>
+</div>
+{% endblock %}
