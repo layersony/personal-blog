@@ -1,0 +1,44 @@
+.navcustom{
+  background-color: white;
+  min-height: 80px;
+}
+.navbar-header a.title{
+  color: black;
+  font-size: 35px;
+}
+
+.navbar-header span{
+  color: blue;
+  font-size: 35px;
+}
+
+.navcustom ul{
+  width: 100%;   
+}
+.navcustom>.container-fluid ul li{
+  margin: 0px;
+}
+.navcustom ul li>.title{
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+}
+.navcustom ul li>.other{
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  border-radius: 40px;
+  min-width: 120px;
+  text-align: center;
+  padding: 10px;
+}
+
+.navcustom ul li>.other:hover{
+  color: white;
+  border-radius: 40px;
+  min-width: 120px;
+  text-align: center;
+  background-color: black;
+}
+
+/**  **/
