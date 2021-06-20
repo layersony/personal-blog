@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h3>Home</h3>
+<h5 class="text-center mb-3">Blog | Home</h5>
 
 
     {% for blog in blogs %}
-    <div>
-      <div class="d-md-flex justify-content-between align-items-center bg-secondary p-1 text-white">
+    <div class="indexblog p-3">
+      <div class="d-md-flex justify-content-between align-items-center p-1">
         <h3>{{ blog.title|capitalize }}</h3>
         <span>Posted on {{ blog.dateposted.strftime('%a %b %d, %Y')}}</span>
       </div>
       <p>{{ blog.content }}</p>
       <div class="d-md-flex justify-content-between align-items-center">
         <span>Author {{ blog.users}}</span>
-        <a href="{{ url_for('main.comment', id= blog.id) }}">Comment <span>{{blog.comments.count()}}</span></a>
+        <a class="fullblog" href="{{ url_for('main.fullblog', id= blog.id) }}">View Full Blog</a>
+        <a href="{{ url_for('main.comment', id= blog.id) }}"><button class="btn btn-outline-success">Comments <span>{{blog.comments.count()}}</span></button></a>
       </div>
 
     </div>

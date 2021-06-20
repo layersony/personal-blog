@@ -1,14 +1,25 @@
+*{
+  font-family: Ubuntu;
+}
+body{
+  background-color: rgba(223, 213, 213, 0.28);
+  background-image: url('/static/images/bg2.png');
+  background-repeat: no-repeat;
+  background-position: bottom bottom;
+  background-size: cover;
+  background-blend-mode: darken;
+}
 .navcustom{
-  background-color: white;
+  background-color: black;
   min-height: 80px;
 }
 .navbar-header a.title{
-  color: black;
+  color: white;
   font-size: 35px;
 }
 
 .navbar-header span{
-  color: blue;
+  color: maroon;
   font-size: 35px;
 }
 
@@ -26,7 +37,7 @@
 .navcustom ul li>.other{
   font-size: 20px;
   text-decoration: none;
-  color: black;
+  color: white;
   border-radius: 40px;
   min-width: 120px;
   text-align: center;
@@ -38,10 +49,15 @@
   border-radius: 40px;
   min-width: 120px;
   text-align: center;
-  background-color: black;
+  background-color: maroon;
 }
 
 /**  **/
+.indexblog{
+  border: 0.5px solid;
+  border-bottom: 5px solid;
+  border-radius: 5px 10px 2px 2px;}
+
 .blogcont{
   width: 1000px;
 
@@ -68,7 +84,7 @@ input[type='submit']{
 }
 input[type='submit']:hover{
   border: 1px solid white;
-  background-color: #4B9E92;
+  background-color: maroon;
   color: white;
 }
 
@@ -78,4 +94,19 @@ input[type='submit']:hover{
   padding: 20px;
   border: 2px solid;
   border-radius: 10px;
+}
+.blogpro{
+  border: 1px solid;
+  border-top: 0px solid;
+  border-bottom: 5px solid;
+  margin-top: 7px;
+  padding: 15px;
+  border-radius: 4px 4px 10px 4px;
+  margin-top: 10px;
+}
+.defaultimg i{
+  font-size:200px;
+}
+.fullblog{
+  color: black;
 }

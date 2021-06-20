@@ -2,7 +2,9 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-<a href="/">Back</a>
+<h5 class="text-center mb-3">Blog | Blog_Post</h5>
+
+<a href="{{ url_for('main.profile', uname=current_user.username)}}">Back</a>
 <div class="container d-flex justify-content-center align-items-center mt-5">
   <div class="postForm">
     <h3 class="text-center mb-4">Post A Blog</h3>

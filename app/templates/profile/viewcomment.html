@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href="{{ url_for('main.profile', uname=current_user.username)}}">Back</a>
+
 <h1>View Comments </h1>
 
 
 {% for justone in allcomments %}
-        <h3>{{ justone.title }}</h3>
-        <p>  Comments <span>{{justone.comments.count()}}</span></p>
-    <a href="{{ url_for('main.deleteComment', id=justone.id) }}">Delete</a>
+<div class="p-3">
+  <p>{{ justone.comment }}</p>
+  <a class="text-danger" href="{{ url_for('main.deleteComment', id=justone.id) }}">Delete</a>
+  <hr>
+</div>
+
 {% endfor %}
 
-<p>{{ quote.quote }}</p>
-<p>{{ quote.author }}</p>
+<div class="text-center">
+  <p>{{ quote.quote }}</p>
+  <sub>--{{ quote.author }}--</sub>
+</div>
 {% endblock %}
 
