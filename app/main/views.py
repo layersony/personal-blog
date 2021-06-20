@@ -1,17 +1,20 @@
-from flask import render_template, url_for, redirect, abort
+from flask import render_template, url_for, redirect, abort, request
 from . import main
 from .. import db
-from ..models import Blog, User, Comment
+from ..models import Blog, User, Comment, Subscribe
 from .forms import CommentForm, BlogPostForm 
 from flask_login import login_required, current_user
 from ..request import get_quotes
+from ..email import mail_message
+import time
+
 
 @main.route('/')
 def index():
   blog = Blog.get_blogs_content()
   title = 'Blog'
   blog.reverse()
-  quote = get_quotes()
+  quote = get_quotes() 
   return render_template('index.html', blogs=blog, title=title, quote=quote)
 
 @main.route('/post/blog', methods=['GET', 'POST',])
@@ -25,6 +28,11 @@ def postblog():
     
     newblog = Blog(title=title, content=content, user_id=current_user.id)
     newblog.save_blog()
+
+    for i in Subscribe.query.all():
+      mail_message("New Blog Is Out", "email/update_subscriber", i.email, newblog=newblog)
+      time.sleep(5)
+
     return redirect(url_for('main.profile', uname=current_user.username))
 
   quote = get_quotes()
@@ -80,3 +88,19 @@ def deleteComment(id):
   db.session.delete(todele)
   db.session.commit()
   return redirect(url_for('main.profile', uname=current_user.username))
+
+@main.route('/post/<id>', methods=['POST', 'GET'])
+def fullblog(id):
+  blogdetail = Blog.query.filter_by(id=id).first()
+  quote = get_quotes()
+  return render_template('fullblog.html', blogdetail=blogdetail,   quote = quote)
+
+@main.route('/subscribe', methods=['POST'])
+def subscribe():
+        email = request.form.get('subscriber')
+        new_sub = Subscribe(email=email)
+        new_sub.save_subscriber()
+        mail_message("Subscribed to Maingi Blog","email/welcome_subscriber", email)
+
+        return redirect(url_for('main.index'))
+ 

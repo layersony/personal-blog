@@ -11,4 +11,3 @@ class CommentForm(FlaskForm):
   comment = TextAreaField('.')
   submit = SubmitField('Submit')
   
-   
