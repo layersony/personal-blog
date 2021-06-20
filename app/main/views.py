@@ -31,7 +31,6 @@ def postblog():
 
     for i in Subscribe.query.all():
       mail_message("New Blog Is Out", "email/update_subscriber", i.email, newblog=newblog)
-      time.sleep(5)
 
     return redirect(url_for('main.profile', uname=current_user.username))
 
