@@ -52,11 +52,22 @@
   border-radius: 5px;
 }
 
-#submit{
-  border-radius: 2px solid blue;
+
+.loginForm{
+  background-color: rgba(0, 0, 0, 0.09);
+  width: 450px;
+  padding: 20px;
+  border: 2px solid;
+  border-radius: 10px;
+}
+input[type='submit']{
+  margin-top:5px;
+  border: 1px solid #4B9E92;
+  background-color: white;
   color: black;
 }
-#submit:hover{
-  background-color: blue;
+input[type='submit']:hover{
+  border: 1px solid white;
+  background-color: #4B9E92;
   color: white;
 }
