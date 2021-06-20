@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-
+<a href="/">Back</a>
 <div>
     <div class="d-md-flex justify-content-between align-items-center p-2">
       <h3>{{ blog.title|capitalize }}</h3>
@@ -11,7 +11,6 @@
     <p>{{ blog.content }}</p>
     <div class="d-md-flex justify-content-between align-items-center">
       <span>Author -- {{ blog.users}} --</span>
-      <a href="{{ url_for('main.comment', id= blog.id) }}">Comment <span>{{blog.comments.count()}}</span></a>
     </div>
 
   </div>
