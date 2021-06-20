@@ -1,18 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h1>Home</h1>
-{% for blog in blogs %}
-  <p>{{ blog.title }}</p>
-  <p>{{ blog.content }}</p>
-  <p>{{ blog.users}}</p>
-  <p>{{ blog.dateposted.strftime('%I:%M %p, %a %b %d, %Y')}}</p>
-  <a href="{{ url_for('main.comment', id= blog.id) }}"><button>Comment</button></a>
-  Comments <span>{{blog.comments.count()}}</span>
-  <hr>
+<h3>Home</h3>
+<div class="container d-md-flex justify-content-center align-items-center">
+  <div class="blogcont">
 
-{% endfor %}
+    {% for blog in blogs %}
+    <div>
+      <div class="d-md-flex justify-content-between align-items-center bg-secondary p-1 text-white">
+        <h3>{{ blog.title|capitalize }}</h3>
+        <span>Posted on {{ blog.dateposted.strftime('%a %b %d, %Y')}}</span>
+      </div>
+      <p>{{ blog.content }}</p>
+      <div class="d-md-flex justify-content-between align-items-center">
+        <span>Author {{ blog.users}}</span>
+        <a href="{{ url_for('main.comment', id= blog.id) }}">Comment <span>{{blog.comments.count()}}</span></a>
+      </div>
 
-<p>{{ quote.quote }}</p>
-<p>{{ quote.author }}</p>
+    </div>
+
+    <hr>
+
+    {% endfor %}
+    <div class="text-center">
+      <p>{{ quote.quote }}</p>
+      <sub>--{{ quote.author }}--</sub>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}
