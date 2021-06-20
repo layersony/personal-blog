@@ -4,7 +4,7 @@ import secrets
 secret =secrets.token_urlsafe(32)
 
 class Config:
-  SECRET_KEY = secret
+  SECRET_KEY = 'secret'
   MAIL_SERVER = 'smtp.googlemail.com'
   MAIL_PORT = 587
   MAIL_USE_TLS = True
