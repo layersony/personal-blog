@@ -1,7 +1,17 @@
+{% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{{ wtf.quick_form(blogform)}}
-
-
-<p>{{ quote.quote }}</p>
-<p>{{ quote.author }}</p>
+{% block content %}
+<a href="/">Back</a>
+<div class="container d-flex justify-content-center align-items-center mt-5">
+  <div class="postForm">
+    <h3 class="text-center mb-4">Post A Blog</h3>
+    {{ wtf.quick_form(blogform)}}
+  </div>
+</div>
+<hr>
+<div class="text-center mt-md-4">
+  <p>{{ quote.quote }}</p>
+  <sub>--{{ quote.author }}--</sub>
+</div>
+{% endblock %}
